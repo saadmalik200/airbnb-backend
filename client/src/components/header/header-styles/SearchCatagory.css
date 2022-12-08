@@ -1,0 +1,52 @@
+/****** Important Values *****/
+/* border color: #9dede1 */
+/* Hover background color: #ffefef */
+
+/* Soft resets */
+
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+}
+
+.search-catagory-container {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+}
+
+.search-kata {
+  cursor: pointer;
+}
+
+.search-kata:hover + .underline {
+  background-color: #000;
+}
+
+.underline {
+  display: block;
+  height: 0.2rem;
+  transition: all 0.3s;
+}
+
+.underline-stay {
+  width: 3rem;
+}
+.underline-exp {
+  width: 8rem;
+}
+.underline-online {
+  width: 14rem;
+}
