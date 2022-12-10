@@ -8,6 +8,7 @@ import HomePage from "./components/homepage/HomePage";
 import Map from "./components/map/Map";
 import LoginForm from "./components/login/LoginForm";
 import SignUpPage from "./components/signup/SignUp";
+import Host from "./components/becomehost/Host";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/home/:singlehome" element={<SingleHouseDetails />} />
           <Route path="/home/login" element={<LoginForm />} />
           <Route path="/confirmation" element={<SignUpPage />} />
+          <Route path="/host" element={<Host />} />
         </Routes>
       </BrowserRouter>
     </div>
