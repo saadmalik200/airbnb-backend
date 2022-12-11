@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "homepage": "https://saadmalik200.github.io/airbnb-react-group-project",
   "private": true,
+  "proxy": "http://localhost:4008",
   "dependencies": {
     "@bcad1591/react-date-picker": "^0.1.1",
     "@emotion/core": "^11.0.0",
