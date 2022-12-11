@@ -19,6 +19,7 @@ const ContextProvider = ({ children }) => {
     filteredData: {},
     activeIconName: "",
     totalGuests: 0,
+    housePrice: 56,
   };
 
   const reducer = (state, action) => {
@@ -51,6 +52,14 @@ const ContextProvider = ({ children }) => {
           calcDays: action.calcDays,
         };
 
+      case "housePrice":
+        return { ...state, housePrice: action.payload };
+
+      case "pricePlus":
+        return { ...state, housePrice: state.housePrice + 1 };
+
+      case "priceMinus":
+        return { ...state, housePrice: state.housePrice - 1 };
       case "formCalender":
         return { ...state, formCalender: !state.formCalender };
 
