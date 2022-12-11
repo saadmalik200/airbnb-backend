@@ -289,6 +289,35 @@ function Host() {
                 <option>No</option>
               </select>
             </div>
+            <br />
+            <hr />
+
+            <div className="mt-[2.5rem] ">
+              <div>
+                <div>
+                  <h1 className="text-[32px] font-[500] text-[black] mb-[12px]">
+                    Now, set your price
+                  </h1>
+                  <p className="text-[18px] text-center">
+                    You can change it anytime
+                  </p>
+                </div>
+                <div className="flex flex-col items-center justify-center gap-4 bg-[#EFEFEF] w-[630px] h-[200px] border-2 border-gray-400 rounded-2xl mx-auto mt-[2rem]">
+                  <div className="flex items-center justify-evenly w-full">
+                    <div className="flex items-center justify-center h-[48px] w-[48px] rounded-full border-2 text-black bg-white border-gray-400">
+                      <p className="text-[3rem]">-</p>
+                    </div>
+                    <div className="text-[48px] font-[500] text-black text-center w-[412px] h-[80px] bg-white border-2 border-gray-400 rounded-2xl">
+                      $56
+                    </div>
+                    <div className="flex items-center justify-center h-[48px] w-[48px] rounded-full border-2 text-black bg-white border-gray-400">
+                      <p className="text-[3rem]">+</p>
+                    </div>
+                  </div>
+                  <p>per night</p>
+                </div>
+              </div>
+            </div>
           </form>
 
           <br />

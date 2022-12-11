@@ -3,10 +3,10 @@ import { Context } from "../../context/Context";
 import "../header/header-styles/Popup.css";
 
 const cataData = [
-  { who: "Adults", age: "13 and above" },
-  { who: "Children", age: "Ages 2-12" },
-  { who: "Infants", age: "Under 2" },
-  { who: "Pets", age: "Bringing a service animal?" },
+  { who: "Guests" },
+  { who: "Bedrooms" },
+  { who: "Beds" },
+  { who: "Bathrooms" },
 ];
 
 const HousePopup = () => {
@@ -20,7 +20,6 @@ const HousePopup = () => {
             <div className="who-cata-container">
               <div className="age-cata">
                 <h2 className="who"> {cata.who} </h2>
-                <p className="age"> {cata.age} </p>
               </div>
               <div className="amount">
                 <span
@@ -46,7 +45,7 @@ const HousePopup = () => {
                 </span>
               </div>
             </div>
-            <div className="bottom-border"></div>
+            <div style={{ top: "-11rem" }} className="bottom-border"></div>
           </div>
         );
       })}
