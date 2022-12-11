@@ -53,15 +53,16 @@
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   font-size: 16px;
   font-weight: 700;
+  align-items: center;
 }
-.adault-passenger-d img {
+.adult-passenger-d img {
   margin-right: 10px;
 }
 .first-form {
   color: #647286;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-  display: grid;
-  grid-template-columns: repeat(3, auto);
+  /* display: grid;
+  grid-template-columns: repeat(3, auto); */
   padding: 40px 20px;
   align-items: center;
 }
@@ -104,5 +105,4 @@
 
 .passenger-d-container input {
   border: 1px solid black;
-  border-radius: 4px;
 }
