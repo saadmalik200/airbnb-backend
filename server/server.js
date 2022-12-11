@@ -1,19 +1,19 @@
-const express = require('express')
-const app = express()
+const express = require("express");
+const app = express();
 
-require('dotenv').config()
+require("dotenv").config();
 
-const dbConnect = require('./config/db')
-dbConnect() // connects to db
+const dbConnect = require("./config/db");
+dbConnect(); // connects to db
 
-app.use(express.json()) // needed to parse the body of the message
-app.use('/users', require('./routes/userRoutes'))
+app.use(express.json()); // needed to parse the body of the message
+app.use("/users", require("./routes/userRoutes"));
+app.use("/houses", require("./routes/houseRoutes"));
+app.get("/", (req, res) => {
+  console.log("Hello from route");
 
-app.get('/', (req, res) => {
-    console.log('Hello from route')
+  res.send("Hello from express");
+});
 
-    res.send('Hello from express')
-})
-
-const port = process.env.PORT || 4001
-app.listen(port, () => console.log('Server is up and running at port', port))
+const port = process.env.PORT || 4001;
+app.listen(port, () => console.log("Server is up and running at port", port));
