@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaUserAlt } from "react-icons/fa";
 import axios from "axios";
 import { Context } from "../../context/Context";
@@ -44,6 +44,26 @@ function Host() {
     const response = await axios.post("/houses/register", houseData);
     console.log(response);
   };
+
+  useEffect(() => {
+    setHouseData({
+      ...houseData,
+      price: state?.housePrice,
+    });
+  }, [state]);
+
+  const handlePrice = (e) => {
+    // setHousePrice(+e.target.value);
+    dispatch({ type: "housePrice", payload: housePrice });
+
+    setHouseData({
+      ...houseData,
+      price: state?.housePrice,
+    });
+  };
+
+  console.log("State house price", state?.housePrice);
+  console.log("House Data Price", houseData.price);
   return (
     <div>
       <div className="h-[100px]">
@@ -472,27 +492,23 @@ function Host() {
                   <div className="flex flex-col items-center justify-center gap-4 bg-[#EFEFEF] w-[630px] h-[200px] border-2 border-gray-400 rounded-2xl mx-auto mt-[2rem]">
                     <div className="flex items-center justify-evenly w-full">
                       <div
-                        onClick={() => setHousePrice((prev) => prev - 1)}
-                        className="flex items-center justify-center h-[48px] w-[48px] rounded-full border-2 text-black bg-white border-gray-400"
+                        // onClick={() => setHousePrice((prev) => prev - 1)}
+                        onClick={() => dispatch({ type: "priceMinus" })}
+                        className="flex cursor-pointer items-center justify-center h-[48px] w-[48px] rounded-full border-2 text-black bg-white border-gray-400"
                       >
                         <p className="text-[3rem]">-</p>
                       </div>
                       <input
-                        value={`€ ${housePrice}`}
-                        onChange={(e) => {
-                          setHouseData({
-                            ...houseData,
-                            price: +e.target.value,
-                          });
-
-                          setHousePrice(+e.target.value);
-                        }}
+                        // value={`€ ${housePrice}`}
+                        value={state?.housePrice}
+                        onChange={handlePrice}
                         className="text-[48px] font-[500] text-black text-center w-[412px] h-[80px] bg-white border-2 border-gray-400 rounded-2xl"
                       />
 
                       <div
-                        onClick={() => setHousePrice((prev) => prev + 1)}
-                        className="flex items-center justify-center h-[48px] w-[48px] rounded-full border-2 text-black bg-white border-gray-400"
+                        // onClick={() => setHousePrice((prev) => prev + 1)}
+                        onClick={() => dispatch({ type: "pricePlus" })}
+                        className="cursor-pointer flex items-center justify-center h-[48px] w-[48px] rounded-full border-2 text-black bg-white border-gray-400"
                       >
                         <p className="text-[3rem]">+</p>
                       </div>
