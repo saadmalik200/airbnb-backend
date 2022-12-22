@@ -7,14 +7,17 @@ import { useNavigate } from "react-router-dom";
 import HousePopup from "./HousePopup";
 
 import { IoIosArrowDown } from "react-icons/io";
+import HostHeader from "../becomehost/HostHeader";
 
 function Host() {
+  const { state, dispatch } = useContext(Context);
   const [houseData, setHouseData] = useState({
     title: "",
     firstname: "",
     lastname: "",
     address: "",
     city: "",
+    country: "",
     zipcode: "",
     email: "",
     phone: 0,
@@ -23,14 +26,18 @@ function Host() {
     housetitle: "",
     description: "",
     price: 0,
+    img1: "",
+    img2: "",
+    img3: "",
+    img4: "",
+    img5: "",
   });
-
-  const { state, dispatch } = useContext(Context);
 
   const [showHomePopup, setShowHomePopup] = useState(false);
   const [housePrice, setHousePrice] = useState(56);
   const navigate = useNavigate();
 
+  console.log("from host page", state.user);
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(houseData);
@@ -59,7 +66,9 @@ function Host() {
   console.log("House Data Price", houseData.price);
   return (
     <div>
-      <div className="h-[100px] bg-black">header</div>
+      <div className="h-[100px]">
+        <HostHeader />
+      </div>
       <div className="passenger-d-container ">
         <div className="py-[30px]">
           <div className="passenger-flight-details px-[20px] py-[20px] flex items-center justify-between border-[0.5px] hover:shadow-xl rounded-md">
@@ -163,6 +172,7 @@ function Host() {
                     placeholder="Enter your city name"
                   />
                 </div>
+
                 <div className="flex flex-col">
                   <label
                     className="font-bold mb-[.5rem] ml-[.5rem]"
@@ -182,6 +192,23 @@ function Host() {
                 </div>
               </div>
               <div className="flex gap-[4rem] mt-[2.5rem]">
+                <div className="flex flex-col">
+                  <label
+                    className="font-bold mb-[.5rem] ml-[.5rem]"
+                    for="country"
+                  >
+                    Country
+                  </label>
+                  <input
+                    onChange={(e) =>
+                      setHouseData({ ...houseData, country: e.target.value })
+                    }
+                    type="text"
+                    className="form-control w-[30rem] rounded-full"
+                    id="country"
+                    placeholder="Enter your city name"
+                  />
+                </div>
                 <div className="flex flex-col">
                   <label
                     className="font-bold mb-[.5rem] ml-[.5rem]"
@@ -355,6 +382,75 @@ function Host() {
                   cols="30"
                   rows="10"
                 ></textarea>
+              </div>
+
+              <div className="flex flex-col mt-[2.5rem]">
+                <label className="font-bold mb-[.5rem] ml-[.5rem]" for="img1">
+                  Uplaod some images of your house
+                </label>
+                <input
+                  onChange={(e) =>
+                    setHouseData({
+                      ...houseData,
+                      img1: e.target.value,
+                    })
+                  }
+                  type="text"
+                  className="form-control w-full rounded-full"
+                  id="img1"
+                  placeholder="Add first image"
+                />
+                <input
+                  onChange={(e) =>
+                    setHouseData({
+                      ...houseData,
+                      img2: e.target.value,
+                    })
+                  }
+                  type="text"
+                  className="form-control w-full rounded-full"
+                  id="img2"
+                  placeholder="Add second image"
+                />
+
+                <input
+                  onChange={(e) =>
+                    setHouseData({
+                      ...houseData,
+                      img3: e.target.value,
+                    })
+                  }
+                  type="text"
+                  className="form-control w-full rounded-full"
+                  id="img3"
+                  placeholder="Add third image"
+                />
+
+                <input
+                  onChange={(e) =>
+                    setHouseData({
+                      ...houseData,
+                      img4: e.target.value,
+                    })
+                  }
+                  type="text"
+                  className="form-control w-full rounded-full"
+                  id="img4"
+                  placeholder="Add fourth image"
+                />
+
+                <input
+                  onChange={(e) =>
+                    setHouseData({
+                      ...houseData,
+                      img5: e.target.value,
+                    })
+                  }
+                  type="text"
+                  className="form-control w-full rounded-full"
+                  id="img5"
+                  placeholder="Add fifth image"
+                />
               </div>
 
               <div className="flex justify-between items-center mt-[3rem]">

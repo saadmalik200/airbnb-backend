@@ -22,6 +22,10 @@ const houseSchema = new Schema({
     type: String,
     required: true,
   },
+  country: {
+    type: String,
+    required: true,
+  },
   zipcode: {
     type: Number,
     required: true,
@@ -59,6 +63,32 @@ const houseSchema = new Schema({
   price: {
     type: Number,
     required: true,
+  },
+
+  img1: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  img2: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  img3: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  img4: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  img5: {
+    type: String,
+    required: true,
+    unique: true,
   },
 });
 

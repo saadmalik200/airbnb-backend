@@ -10,6 +10,7 @@ import { Context } from "../../context/Context";
 import { useNavigate } from "react-router-dom";
 import CardContainer from "../card/CardContainer";
 import axios from "axios";
+
 //import Select from "@mui/material/Select";
 
 function CountrySelector() {
@@ -47,24 +48,23 @@ function CountrySelector() {
   );
 }
 
-const LoginForm = () => {
-  const { state, dispatch } = useContext(Context);
+const RegisterForm = () => {
+  //const { handleLogin, login } = useContext(Context);
+
   const [data, setData] = useState({ phone: "", password: "" });
   const navigate = useNavigate();
 
-  console.log("from login page", state.user);
   const handleClose = () => {
     navigate("/home");
   };
-  const handleLogin = async () => {
-    const response = await axios.post("/users/login", data);
-    console.log("response from login", response);
+
+  const handleRegister = async () => {
+    const response = await axios.post("/users/register", data);
+    console.log("response from register", response);
 
     if (response.data.success) {
-      dispatch({ type: "ActiveUser", payload: response.data.user });
-      navigate("/host");
-    } else {
-      alert("Invalid phone number or password!!");
+      navigate("/home");
+      alert("You have successfully registered");
     }
   };
   return (
@@ -82,14 +82,14 @@ const LoginForm = () => {
               >
                 <GrClose />
               </div>
-              <div className="w-[160px] font-[600]">Log in</div>
+              <div className="w-[160px] font-[600]">Sign up</div>
               <div></div>
             </div>
             <div className="w-[568] h-[353px] px-[24px]  text-[14px]">
               <div className="text-[24px] font-[600] mt-[32px] mb-[16px]">
                 Welcome to Airbnb
               </div>
-              <div className="border-2  border-b-0 w-full h-[56px] rounded-t-2xl flex flex-row items-center">
+              <div className="border-2  border-b-0 w-full h-[56px] flex flex-row items-center rounded-t-2xl">
                 <CountrySelector />
               </div>
               <div className="border-2 w-full h-[56px]  flex items-center p-5">
@@ -127,7 +127,7 @@ const LoginForm = () => {
                     "radial-gradient(circle, rgb(255, 56, 92) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%)",
                 }}
                 className="w-full h-[48px] mt-[16px] mb-[24px] rounded-2xl text-white flex justify-center items-center font-[500] cursor-pointer"
-                onClick={handleLogin}
+                onClick={handleRegister}
               >
                 Continue
               </div>
@@ -179,4 +179,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;
