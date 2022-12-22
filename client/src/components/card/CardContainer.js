@@ -1,12 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../context/Context";
 
 import { BsMap } from "react-icons/bs";
+import HostCard from "../becomehost/HostCard";
 import Card from "./Card";
+import axios from "axios";
 
 const CardContainer = () => {
-  const { state, login } = useContext(Context);
+  const { state, login, dispatch } = useContext(Context);
+  useEffect(() => {
+    async function getData() {
+      const response = await axios.get("/houses/list");
+      console.log("response from house list", response);
+      dispatch({ type: "HouseList", payload: response.data.houses });
+    }
+    getData();
+  }, []);
+
   const navigate = useNavigate();
 
   return (
@@ -25,13 +36,13 @@ const CardContainer = () => {
               ""
             );
           })
-        : state?.localData?.map((item, i) => (
+        : state?.houses?.map((item, i) => (
             <div
               key={i}
               style={{ cursor: "pointer" }}
               onClick={() => navigate(`/home/${item?.id}`)}
             >
-              <Card item={item} i={i} />
+              <HostCard item={item} i={i} />
             </div>
           ))}
 

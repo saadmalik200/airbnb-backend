@@ -6,6 +6,7 @@ import LoginForm from "../login/LoginForm";
 
 const HomePage = () => {
   const { login } = useContext(Context);
+
   return (
     <div>
       {!login && <Header />}

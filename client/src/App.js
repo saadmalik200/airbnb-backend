@@ -9,6 +9,8 @@ import Map from "./components/map/Map";
 import LoginForm from "./components/login/LoginForm";
 import SignUpPage from "./components/signup/SignUp";
 import Host from "./components/becomehost/Host";
+import RegisterForm from "./components/login/RegisterForm";
+import HostLayout from "./components/becomehost/HostLayout";
 
 function App() {
   return (
@@ -24,8 +26,12 @@ function App() {
           <Route path="/map" element={<Map height={830} />} />
           <Route path="/home/:singlehome" element={<SingleHouseDetails />} />
           <Route path="/home/login" element={<LoginForm />} />
+          <Route path="/home/register" element={<RegisterForm />} />
           <Route path="/confirmation" element={<SignUpPage />} />
-          <Route path="/host" element={<Host />} />
+
+          <Route element={<HostLayout />}>
+            <Route path="/host" element={<Host />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>

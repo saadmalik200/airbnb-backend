@@ -19,6 +19,8 @@ const ContextProvider = ({ children }) => {
     filteredData: {},
     activeIconName: "",
     totalGuests: 0,
+    user: {},
+    houses: [],
   };
 
   const reducer = (state, action) => {
@@ -65,6 +67,17 @@ const ContextProvider = ({ children }) => {
         return { ...state, activeIconName: action.payload };
       case "change-active-icon":
         return { ...state, activeIconName: "" };
+
+      case "ActiveUser":
+        console.log("active user", state.user);
+        return { ...state, user: action.payload };
+
+      case "HouseList":
+        return { ...state, houses: [...action.payload] };
+
+      case "logout":
+        console.log("logout", state.user);
+        return { ...state, user: {} };
       default:
         return;
     }
@@ -155,7 +168,8 @@ const ContextProvider = ({ children }) => {
 
   const handleLogin = () => {
     setLogin((prev) => !prev);
-    // navigate("/home/login");
+
+    //navigate("/home/login");
   };
   return (
     <Context.Provider
