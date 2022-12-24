@@ -37,6 +37,8 @@ function Host() {
     bedrooms: 0,
     beds: 0,
     bathrooms: 0,
+    firstDate: "",
+    secondDate: "",
   });
 
   const [showHomePopup, setShowHomePopup] = useState(false);
@@ -55,10 +57,10 @@ function Host() {
     setHouseData({
       ...houseData,
       price: state?.housePrice,
-      guests: amount?.guests,
-      bedrooms: amount?.bedrooms,
-      beds: amount?.beds,
-      bathrooms: amount?.bathrooms,
+      guests: amount[0],
+      bedrooms: amount[1],
+      beds: amount[2],
+      bathrooms: amount[3],
     });
   }, [state, amount]);
 

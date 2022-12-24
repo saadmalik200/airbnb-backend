@@ -12,7 +12,7 @@ const cataData = [
 const HousePopup = () => {
   const { amount, increment, decrement, handleReset } = useContext(Context);
 
-  console.log(amount);
+  console.log("Amount is", amount[1]);
   return (
     <div className="who-pop-up-container">
       {cataData.map((cata, i) => {
