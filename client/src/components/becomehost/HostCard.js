@@ -8,28 +8,36 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 import Carousel from "react-material-ui-carousel";
 import { Context } from "../../context/Context";
-import { useContext, useEffect } from "react";
-// import GeoData from "./Geolocation";
+import { useContext, useEffect, useState } from "react";
+import GeoData from "../card/Geolocation";
 
 import { BsFillStarFill } from "react-icons/bs";
 
 export default function ContainerResponsive({ item, i }) {
   const { state } = useContext(Context);
+  const [latLng, setLatLng] = useState({
+    lat: 0,
+    lng: 0,
+  });
 
   useEffect(() => {
     async function getData() {
       const response = await fetch(
-        "http://api.openweathermap.org/geo/1.0/zip?zip=28205&appid=b78c4b5cbf9921ae49e185f48f94ed7f"
+        `http://api.openweathermap.org/geo/1.0/zip?zip=${Number(
+          item.zipcode
+        )},${item.country}&appid=b78c4b5cbf9921ae49e185f48f94ed7f`
       );
       const data = await response.json();
       console.log("here is the api result", data);
+      setLatLng({ lat: data.lat, lng: data.lon });
     }
     getData();
   }, []);
 
+  console.log(state.distance);
   return (
     <Box sx={{ height: 399.61, width: 315.39, resize: 0 }}>
-      {/* <GeoData lat={item.latlong[0]} lng={item.latlong[1]} /> */}
+      <GeoData lat={+latLng.lat} lng={+latLng.lng} />
       <Card
         sx={(theme) => ({
           padding: 0,
@@ -125,18 +133,18 @@ export default function ContainerResponsive({ item, i }) {
 
             <Typography style={{ display: "flex" }} level="h2" fontWeight="lg">
               <p className="w-[26rem]">
-                {item.city.slice(0, 15)} {item.city}{" "}
+                {item.city.slice(0, 15)} {item.country}{" "}
               </p>
               <div className="flex gap-2 items-center">
                 <BsFillStarFill />
-                {/* <p>{item.rating}</p> */}
+                <p>{(Math.random() * 5).toFixed(2)}</p>
               </div>
             </Typography>
             <Typography sx={{ color: "gray" }} level="body2">
-              {/* {state.distance[i]} kilometer away */}
+              {state.distance[i]} kilometer away
             </Typography>
             <Typography sx={{ color: "gray" }} level="body2">
-              {/* {item.date} */}
+              {item.hostfirstDate}-{item.hostsecondDate}
             </Typography>
             <Typography style={{ marginTop: 6 }} level="body2">
               <strong>€ {item.price}</strong> night
