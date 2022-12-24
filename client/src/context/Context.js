@@ -1,5 +1,4 @@
 import { createContext, useReducer, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 export const Context = createContext();
 
@@ -11,6 +10,8 @@ const ContextProvider = ({ children }) => {
     geoData: [],
     firstDate: "",
     secondDate: "",
+    hostfirstDate: "",
+    hostsecondDate: "",
     dateDiff: 0,
     startDate: "",
     endDate: "",
@@ -19,6 +20,8 @@ const ContextProvider = ({ children }) => {
     filteredData: {},
     activeIconName: "",
     totalGuests: 0,
+    user: {},
+    houses: [],
     housePrice: 56,
   };
 
@@ -74,6 +77,23 @@ const ContextProvider = ({ children }) => {
         return { ...state, activeIconName: action.payload };
       case "change-active-icon":
         return { ...state, activeIconName: "" };
+
+      case "ActiveUser":
+        console.log("active user", state.user);
+        return { ...state, user: action.payload };
+
+      case "HouseList":
+        return { ...state, houses: [...action.payload] };
+      case "hostfirstSecondDate":
+        return {
+          ...state,
+          hostfirstDate: action.hostfirstDate,
+          hostsecondDate: action.hostsecondDate,
+        };
+
+      case "logout":
+        console.log("logout", state.user);
+        return { ...state, user: {} };
       default:
         return;
     }
@@ -88,10 +108,10 @@ const ContextProvider = ({ children }) => {
 
   // State for adding guests
   const [amount, setAmount] = useState({
-    0: 0,
-    1: 0,
-    2: 0,
-    3: 0,
+    guests: 0,
+    bedrooms: 0,
+    beds: 0,
+    bathrooms: 0,
   });
 
   const increment = (e) => {
@@ -108,10 +128,10 @@ const ContextProvider = ({ children }) => {
 
   const handleReset = () => {
     setAmount({
-      0: 0,
-      1: 0,
-      2: 0,
-      3: 0,
+      guests: 0,
+      bedrooms: 0,
+      beds: 0,
+      bathrooms: 0,
     });
   };
 
@@ -164,7 +184,8 @@ const ContextProvider = ({ children }) => {
 
   const handleLogin = () => {
     setLogin((prev) => !prev);
-    // navigate("/home/login");
+
+    //navigate("/home/login");
   };
   return (
     <Context.Provider

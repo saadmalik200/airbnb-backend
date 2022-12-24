@@ -7,14 +7,19 @@ import { useNavigate } from "react-router-dom";
 import HousePopup from "./HousePopup";
 
 import { IoIosArrowDown } from "react-icons/io";
+import HostHeader from "../becomehost/HostHeader";
+import CountryCode from "./CountryCode";
+import DatePicker from "./DatePicker";
 
 function Host() {
+  const { state, amount, dispatch } = useContext(Context);
   const [houseData, setHouseData] = useState({
     title: "",
     firstname: "",
     lastname: "",
     address: "",
     city: "",
+    country: "",
     zipcode: "",
     email: "",
     phone: 0,
@@ -23,14 +28,22 @@ function Host() {
     housetitle: "",
     description: "",
     price: 0,
+    img1: "",
+    img2: "",
+    img3: "",
+    img4: "",
+    img5: "",
+    guests: 0,
+    bedrooms: 0,
+    beds: 0,
+    bathrooms: 0,
   });
-
-  const { state, dispatch } = useContext(Context);
 
   const [showHomePopup, setShowHomePopup] = useState(false);
   const [housePrice, setHousePrice] = useState(56);
   const navigate = useNavigate();
 
+  console.log("from host page", state.user);
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(houseData);
@@ -42,8 +55,12 @@ function Host() {
     setHouseData({
       ...houseData,
       price: state?.housePrice,
+      guests: amount?.guests,
+      bedrooms: amount?.bedrooms,
+      beds: amount?.beds,
+      bathrooms: amount?.bathrooms,
     });
-  }, [state]);
+  }, [state, amount]);
 
   const handlePrice = (e) => {
     // setHousePrice(+e.target.value);
@@ -59,7 +76,9 @@ function Host() {
   console.log("House Data Price", houseData.price);
   return (
     <div>
-      <div className="h-[100px] bg-black">header</div>
+      <div className="h-[100px]">
+        <HostHeader />
+      </div>
       <div className="passenger-d-container ">
         <div className="py-[30px]">
           <div className="passenger-flight-details px-[20px] py-[20px] flex items-center justify-between border-[0.5px] hover:shadow-xl rounded-md">
@@ -163,6 +182,7 @@ function Host() {
                     placeholder="Enter your city name"
                   />
                 </div>
+
                 <div className="flex flex-col">
                   <label
                     className="font-bold mb-[.5rem] ml-[.5rem]"
@@ -182,6 +202,28 @@ function Host() {
                 </div>
               </div>
               <div className="flex gap-[4rem] mt-[2.5rem]">
+                <div className="flex flex-col">
+                  <label
+                    className="font-bold mb-[.5rem] ml-[.5rem]"
+                    for="country"
+                  >
+                    Country
+                  </label>
+                  {/*  <input
+                    onChange={(e) =>
+                      setHouseData({ ...houseData, country: e.target.value })
+                    }
+                    type="text"
+                    className="form-control w-[30rem] rounded-full"
+                    id="country"
+                    placeholder="Enter your city name"
+                  /> */}
+
+                  <CountryCode
+                    setHouseData={setHouseData}
+                    houseData={houseData}
+                  />
+                </div>
                 <div className="flex flex-col">
                   <label
                     className="font-bold mb-[.5rem] ml-[.5rem]"
@@ -357,28 +399,105 @@ function Host() {
                 ></textarea>
               </div>
 
-              <div className="flex justify-between items-center mt-[3rem]">
-                <label
-                  className="font-bold mb-[.5rem] ml-[.5rem]"
-                  for="superhost"
-                >
-                  Are you a Superhost?
+              <div className="flex flex-col mt-[2.5rem]">
+                <label className="font-bold mb-[.5rem] ml-[.5rem]" for="img1">
+                  Uplaod some images of your house
                 </label>
-                <select
+                <input
                   onChange={(e) =>
                     setHouseData({
                       ...houseData,
-                      superhost: e.target.value,
+                      img1: e.target.value,
                     })
                   }
-                  className="w-[35rem] py-[15px] pl-[16px]   rounded-full"
-                >
-                  <option selected disabled className="">
-                    Select an option:
-                  </option>
-                  <option value={true}>Yes</option>
-                  <option value={false}>No</option>
-                </select>
+                  type="text"
+                  className="form-control w-full rounded-full"
+                  id="img1"
+                  placeholder="Add first image"
+                />
+                <input
+                  onChange={(e) =>
+                    setHouseData({
+                      ...houseData,
+                      img2: e.target.value,
+                    })
+                  }
+                  type="text"
+                  className="form-control w-full rounded-full"
+                  id="img2"
+                  placeholder="Add second image"
+                />
+
+                <input
+                  onChange={(e) =>
+                    setHouseData({
+                      ...houseData,
+                      img3: e.target.value,
+                    })
+                  }
+                  type="text"
+                  className="form-control w-full rounded-full"
+                  id="img3"
+                  placeholder="Add third image"
+                />
+
+                <input
+                  onChange={(e) =>
+                    setHouseData({
+                      ...houseData,
+                      img4: e.target.value,
+                    })
+                  }
+                  type="text"
+                  className="form-control w-full rounded-full"
+                  id="img4"
+                  placeholder="Add fourth image"
+                />
+
+                <input
+                  onChange={(e) =>
+                    setHouseData({
+                      ...houseData,
+                      img5: e.target.value,
+                    })
+                  }
+                  type="text"
+                  className="form-control w-full rounded-full"
+                  id="img5"
+                  placeholder="Add fifth image"
+                />
+              </div>
+
+              <div className="flex flex-col  mt-[3rem]">
+                <div className="flex justify-between items-center">
+                  <label
+                    className="font-bold mb-[.5rem] ml-[.5rem]"
+                    for="superhost"
+                  >
+                    Are you a Superhost?
+                  </label>
+                  <select
+                    onChange={(e) =>
+                      setHouseData({
+                        ...houseData,
+                        superhost: e.target.value,
+                      })
+                    }
+                    className="w-[35rem] py-[15px] pl-[16px]   rounded-full"
+                  >
+                    <option selected disabled className="">
+                      Select an option:
+                    </option>
+                    <option value={true}>Yes</option>
+                    <option value={false}>No</option>
+                  </select>
+                </div>
+                <div className="mt-5  flex justify-between items-center">
+                  <label className="font-bold mb-[.5rem] ml-[.5rem]" for="">
+                    From when is your Apartment available?
+                  </label>
+                  <DatePicker />
+                </div>
               </div>
               <br />
               <hr />
@@ -425,7 +544,20 @@ function Host() {
 
             <br />
           </div>
-          <button type="submit">Submit</button>
+          <div className="mt-5  flex justify-between px-10">
+            <button
+              className="bg-slate-400 rounded-2xl w-[70px] h-[40px] hover:bg-slate-500"
+              type="submit"
+            >
+              Back
+            </button>
+            <button
+              className="bg-slate-400 rounded-2xl w-[70px] h-[40px]  hover:bg-slate-500"
+              type="submit"
+            >
+              Submit
+            </button>
+          </div>
         </form>
       </div>
     </div>
