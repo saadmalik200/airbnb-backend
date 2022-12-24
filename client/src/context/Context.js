@@ -108,10 +108,10 @@ const ContextProvider = ({ children }) => {
 
   // State for adding guests
   const [amount, setAmount] = useState({
-    guests: 0,
-    bedrooms: 0,
-    beds: 0,
-    bathrooms: 0,
+    0: 0,
+    1: 0,
+    2: 0,
+    3: 0,
   });
 
   const increment = (e) => {

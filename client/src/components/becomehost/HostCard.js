@@ -144,7 +144,7 @@ export default function ContainerResponsive({ item, i }) {
               {state.distance[i]} kilometer away
             </Typography>
             <Typography sx={{ color: "gray" }} level="body2">
-              {item.hostfirstDate}-{item.hostsecondDate}
+              {state?.hostfirstDate}-{state?.hostsecondDate}
             </Typography>
             <Typography style={{ marginTop: 6 }} level="body2">
               <strong>€ {item.price}</strong> night
