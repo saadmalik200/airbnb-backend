@@ -90,6 +90,22 @@ const houseSchema = new Schema({
     required: true,
     unique: true,
   },
+  guests: {
+    type: String,
+    required: true,
+  },
+  bedrooms: {
+    type: String,
+    required: true,
+  },
+  beds: {
+    type: String,
+    required: true,
+  },
+  bathrooms: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("House", houseSchema);

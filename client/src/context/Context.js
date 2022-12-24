@@ -1,5 +1,4 @@
 import { createContext, useReducer, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 export const Context = createContext();
 
@@ -11,6 +10,8 @@ const ContextProvider = ({ children }) => {
     geoData: [],
     firstDate: "",
     secondDate: "",
+    hostfirstDate: "",
+    hostsecondDate: "",
     dateDiff: 0,
     startDate: "",
     endDate: "",
@@ -83,6 +84,12 @@ const ContextProvider = ({ children }) => {
 
       case "HouseList":
         return { ...state, houses: [...action.payload] };
+      case "hostfirstSecondDate":
+        return {
+          ...state,
+          hostfirstDate: action.hostfirstDate,
+          hostsecondDate: action.hostsecondDate,
+        };
 
       case "logout":
         console.log("logout", state.user);
@@ -101,10 +108,10 @@ const ContextProvider = ({ children }) => {
 
   // State for adding guests
   const [amount, setAmount] = useState({
-    0: 0,
-    1: 0,
-    2: 0,
-    3: 0,
+    guests: 0,
+    bedrooms: 0,
+    beds: 0,
+    bathrooms: 0,
   });
 
   const increment = (e) => {
@@ -121,10 +128,10 @@ const ContextProvider = ({ children }) => {
 
   const handleReset = () => {
     setAmount({
-      0: 0,
-      1: 0,
-      2: 0,
-      3: 0,
+      guests: 0,
+      bedrooms: 0,
+      beds: 0,
+      bathrooms: 0,
     });
   };
 

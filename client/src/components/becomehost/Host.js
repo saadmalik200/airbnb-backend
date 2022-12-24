@@ -8,9 +8,11 @@ import HousePopup from "./HousePopup";
 
 import { IoIosArrowDown } from "react-icons/io";
 import HostHeader from "../becomehost/HostHeader";
+import CountryCode from "./CountryCode";
+import DatePicker from "./DatePicker";
 
 function Host() {
-  const { state, dispatch } = useContext(Context);
+  const { state, amount, dispatch } = useContext(Context);
   const [houseData, setHouseData] = useState({
     title: "",
     firstname: "",
@@ -31,6 +33,10 @@ function Host() {
     img3: "",
     img4: "",
     img5: "",
+    guests: 0,
+    bedrooms: 0,
+    beds: 0,
+    bathrooms: 0,
   });
 
   const [showHomePopup, setShowHomePopup] = useState(false);
@@ -49,8 +55,12 @@ function Host() {
     setHouseData({
       ...houseData,
       price: state?.housePrice,
+      guests: amount?.guests,
+      bedrooms: amount?.bedrooms,
+      beds: amount?.beds,
+      bathrooms: amount?.bathrooms,
     });
-  }, [state]);
+  }, [state, amount]);
 
   const handlePrice = (e) => {
     // setHousePrice(+e.target.value);
@@ -199,7 +209,7 @@ function Host() {
                   >
                     Country
                   </label>
-                  <input
+                  {/*  <input
                     onChange={(e) =>
                       setHouseData({ ...houseData, country: e.target.value })
                     }
@@ -207,6 +217,11 @@ function Host() {
                     className="form-control w-[30rem] rounded-full"
                     id="country"
                     placeholder="Enter your city name"
+                  /> */}
+
+                  <CountryCode
+                    setHouseData={setHouseData}
+                    houseData={houseData}
                   />
                 </div>
                 <div className="flex flex-col">
@@ -453,28 +468,36 @@ function Host() {
                 />
               </div>
 
-              <div className="flex justify-between items-center mt-[3rem]">
-                <label
-                  className="font-bold mb-[.5rem] ml-[.5rem]"
-                  for="superhost"
-                >
-                  Are you a Superhost?
-                </label>
-                <select
-                  onChange={(e) =>
-                    setHouseData({
-                      ...houseData,
-                      superhost: e.target.value,
-                    })
-                  }
-                  className="w-[35rem] py-[15px] pl-[16px]   rounded-full"
-                >
-                  <option selected disabled className="">
-                    Select an option:
-                  </option>
-                  <option value={true}>Yes</option>
-                  <option value={false}>No</option>
-                </select>
+              <div className="flex flex-col  mt-[3rem]">
+                <div className="flex justify-between items-center">
+                  <label
+                    className="font-bold mb-[.5rem] ml-[.5rem]"
+                    for="superhost"
+                  >
+                    Are you a Superhost?
+                  </label>
+                  <select
+                    onChange={(e) =>
+                      setHouseData({
+                        ...houseData,
+                        superhost: e.target.value,
+                      })
+                    }
+                    className="w-[35rem] py-[15px] pl-[16px]   rounded-full"
+                  >
+                    <option selected disabled className="">
+                      Select an option:
+                    </option>
+                    <option value={true}>Yes</option>
+                    <option value={false}>No</option>
+                  </select>
+                </div>
+                <div className="mt-5  flex justify-between items-center">
+                  <label className="font-bold mb-[.5rem] ml-[.5rem]" for="">
+                    From when is your Apartment available?
+                  </label>
+                  <DatePicker />
+                </div>
               </div>
               <br />
               <hr />
@@ -521,7 +544,20 @@ function Host() {
 
             <br />
           </div>
-          <button type="submit">Submit</button>
+          <div className="mt-5  flex justify-between px-10">
+            <button
+              className="bg-slate-400 rounded-2xl w-[70px] h-[40px] hover:bg-slate-500"
+              type="submit"
+            >
+              Back
+            </button>
+            <button
+              className="bg-slate-400 rounded-2xl w-[70px] h-[40px]  hover:bg-slate-500"
+              type="submit"
+            >
+              Submit
+            </button>
+          </div>
         </form>
       </div>
     </div>
