@@ -1,7 +1,7 @@
 import React from "react";
 
 const CountryCode = ({ setHouseData, houseData }) => {
-  console.log("country code", houseData.country);
+  // console.log("country code", houseData.country);
   return (
     <select
       className="form-control w-[30rem] rounded-full py-[25px] h-[45px] pl-[16px]"

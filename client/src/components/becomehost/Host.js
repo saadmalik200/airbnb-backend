@@ -45,7 +45,7 @@ function Host() {
   const [housePrice, setHousePrice] = useState(56);
   const navigate = useNavigate();
 
-  console.log("from host page", state.user);
+  // console.log("from host page", state.user);
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(houseData);
@@ -61,6 +61,8 @@ function Host() {
       bedrooms: amount[1],
       beds: amount[2],
       bathrooms: amount[3],
+      firstDate: state?.hostfirstDate,
+      secondDate: state?.hostsecondDate,
     });
   }, [state, amount]);
 
@@ -74,8 +76,8 @@ function Host() {
     });
   };
 
-  console.log("State house price", state?.housePrice);
-  console.log("House Data Price", houseData.price);
+  // console.log("State house price", state?.housePrice);
+  // console.log("House Data Price", houseData.price);
   return (
     <div>
       <div className="h-[100px]">
