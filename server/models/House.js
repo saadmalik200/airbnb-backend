@@ -106,6 +106,14 @@ const houseSchema = new Schema({
     type: String,
     required: true,
   },
+  firstDate: {
+    type: String,
+    required: true,
+  },
+  secondDate: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("House", houseSchema);
