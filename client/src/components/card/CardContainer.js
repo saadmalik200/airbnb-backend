@@ -45,16 +45,15 @@ const CardContainer = () => {
   return (
     <div className="flex-col">
       <div className="flex justify-center gap-10 mb-[10rem] flex-wrap relative">
-        {state.activeIconName &&
-          state?.houses?.map((item, i) => (
-            <div
-              key={i}
-              style={{ cursor: "pointer" }}
-              onClick={() => navigate(`/home/${item?.id}`)}
-            >
-              <HostCard item={item} i={i} />
-            </div>
-          ))}
+        {state?.houses?.map((item, i) => (
+          <div
+            key={i}
+            style={{ cursor: "pointer" }}
+            onClick={() => navigate(`/home/${item?.id}`)}
+          >
+            <HostCard item={item} i={i} />
+          </div>
+        ))}
 
         {!login && (
           <button
@@ -68,7 +67,9 @@ const CardContainer = () => {
           </button>
         )}
       </div>
-      {state?.houses?.length > 0 && state?.houses?.length < total ? (
+      {state?.houses?.length > 0 &&
+      state?.houses?.length < total &&
+      !state.activeIconName ? (
         <button
           onClick={handleLoadMore}
           className="bg-black px-[19px]  py-[14px] w-[137.74px] z-40 rounded-full text-white h-[49.92px] float-right"
