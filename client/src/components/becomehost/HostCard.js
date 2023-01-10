@@ -139,7 +139,7 @@ export default function ContainerResponsive({ item, i }) {
 
             <Typography style={{ display: "flex" }} level="h2" fontWeight="lg">
               <p className="w-[26rem]">
-                {item.city.slice(0, 15)} {item.country}{" "}
+                {item?.city?.slice(0, 15)} {item?.country}{" "}
               </p>
               <div className="flex gap-2 items-center">
                 <BsFillStarFill />
@@ -147,13 +147,13 @@ export default function ContainerResponsive({ item, i }) {
               </div>
             </Typography>
             <Typography sx={{ color: "gray" }} level="body2">
-              {state.distance[i]} kilometer away
+              {state?.distance[i]} kilometer away
             </Typography>
             <Typography sx={{ color: "gray" }} level="body2">
-              {item.firstDate}-{item.secondDate}
+              {item?.firstDate}-{item?.secondDate}
             </Typography>
             <Typography style={{ marginTop: 6 }} level="body2">
-              <strong>€ {item.price}</strong> night
+              <strong>€ {item?.price}</strong> night
             </Typography>
           </div>
         </Box>
