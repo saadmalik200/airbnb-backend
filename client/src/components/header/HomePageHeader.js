@@ -6,6 +6,7 @@ import SearchExtension from "./SearchExtension";
 import SearchCatagory from "./SearchCatagory";
 import { useNavigate } from "react-router-dom";
 import { BiLogOut } from "react-icons/bi";
+import { BsFillBookmarkHeartFill } from "react-icons/bs";
 
 const HomePageHeader = () => {
   const { discover, setDiscover, dispatch, state } = useContext(Context);
@@ -40,7 +41,11 @@ const HomePageHeader = () => {
             <h3 className="host-text">Become a host</h3>
           </span>
           <span className="globe-background">
-            <i className="fa-solid fa-globe"></i>
+            {!state?.user?._id ? (
+              <i className="fa-solid fa-globe"></i>
+            ) : (
+              <BsFillBookmarkHeartFill className="text-[20px]" />
+            )}
           </span>
           <div onClick={handleLogin} className="bars-user">
             <i className="fa-solid fa-bars"></i>

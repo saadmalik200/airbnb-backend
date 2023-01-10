@@ -13,6 +13,12 @@ import GeoData from "../card/Geolocation";
 
 import { BsFillStarFill } from "react-icons/bs";
 
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return (Math.random() * (max - min) + min).toFixed(2); // The maximum is exclusive and the minimum is inclusive
+}
+
 export default function ContainerResponsive({ item, i }) {
   const { state } = useContext(Context);
   const [latLng, setLatLng] = useState({
@@ -137,7 +143,7 @@ export default function ContainerResponsive({ item, i }) {
               </p>
               <div className="flex gap-2 items-center">
                 <BsFillStarFill />
-                <p>{(Math.random() * 5).toFixed(2)}</p>
+                <p>{getRandomInt(4, 5)}</p>
               </div>
             </Typography>
             <Typography sx={{ color: "gray" }} level="body2">
