@@ -59,7 +59,7 @@ module.exports.search = async (req, res) => {
 
     const houses = await House.find(filter);
 
-    console.log("🚀 ~ module.exports.search= ~ products", houses);
+    console.log("🚀 ~ module.exports.search= ~ products", houses, total);
 
     res.send({ success: true, houses });
   } catch (error) {
