@@ -84,6 +84,10 @@ const ContextProvider = ({ children }) => {
 
       case "HouseList":
         return { ...state, houses: [...action.payload] };
+
+      case "addHouseList":
+        return { ...state, houses: [...state.houses, ...action.payload] };
+
       case "hostfirstSecondDate":
         return {
           ...state,

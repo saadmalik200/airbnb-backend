@@ -18,13 +18,52 @@ module.exports.register = async (req, res) => {
 
 module.exports.list = async (req, res) => {
   try {
-    console.log("Hello from house list");
+    console.log("Hello from house list", req.query);
 
-    const houses = await House.find();
+    //const houses = await House.find();
+    const skip = req.query.skip === undefined ? 0 : Number(req.query.skip);
+    const houses = await House.find().limit(3).skip(skip);
+    const total = await House.countDocuments();
+    console.log("skip,total", skip, total);
+
     if (!houses) return res.send({ success: false, errorId: 1 });
-    res.send({ success: true, houses });
+    res.send({ success: true, houses, total });
   } catch (error) {
     console.log("🚀 ~ house list error", error.message);
+
+    res.send({ success: false, error: error.message });
+  }
+};
+
+//// filter ///////////////
+
+module.exports.search = async (req, res) => {
+  try {
+    console.log("search", req.body.name);
+    const filter = {};
+
+    if (req.body.name) {
+      const regExp = new RegExp(req.body.name, "i");
+      // console.log("🚀 ~ module.exports.search= ~ regExp", regExp)
+      filter.name = regExp;
+    }
+
+    // if (req.body.minPrice > 0 || req.body.maxPrice > 0) {
+    //   filter.price = {
+    //     $gte: req.body.minPrice,
+    //     $lte: req.body.maxPrice,
+    //   };
+    // }
+
+    console.log("🚀 ~ module.exports.search= ~ filter", filter);
+
+    const houses = await House.find(filter);
+
+    console.log("🚀 ~ module.exports.search= ~ products", houses);
+
+    res.send({ success: true, houses });
+  } catch (error) {
+    console.log("🚀 ~ product search error", error.message);
 
     res.send({ success: false, error: error.message });
   }

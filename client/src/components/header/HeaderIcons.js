@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useContext } from "react";
 import { Context } from "../../context/Context";
 import { icons } from "../localdata/Icons";
@@ -15,8 +16,16 @@ const HeaderIcons = () => {
     slider.scrollLeft += 500;
   };
 
-  const handleIconClick = (iconName) => {
+  const handleIconClick = async (iconName) => {
+    console.log("iconName", iconName);
     dispatch({ type: "active-icon-name", payload: iconName });
+    const response = await axios.post("/houses/search", { name: iconName });
+    if (response.data.success) {
+      dispatch({
+        type: "HouseList",
+        payload: response.data.houses,
+      });
+    }
   };
 
   return (
