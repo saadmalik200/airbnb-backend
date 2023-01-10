@@ -19,7 +19,7 @@ const HeaderIcons = () => {
   const handleIconClick = async (iconName) => {
     console.log("iconName", iconName);
     dispatch({ type: "active-icon-name", payload: iconName });
-    const response = await axios.post("/houses/search", { name: iconName });
+    const response = await axios.post("/houses/search", { housecat: iconName });
     if (response.data.success) {
       dispatch({
         type: "HouseList",

@@ -39,13 +39,13 @@ module.exports.list = async (req, res) => {
 
 module.exports.search = async (req, res) => {
   try {
-    console.log("search", req.body.name);
+    console.log("search", req.body.housecat);
     const filter = {};
 
-    if (req.body.name) {
-      const regExp = new RegExp(req.body.name, "i");
+    if (req.body.housecat) {
+      const regExp = new RegExp(req.body.housecat, "i");
       // console.log("🚀 ~ module.exports.search= ~ regExp", regExp)
-      filter.name = regExp;
+      filter.housecat = regExp;
     }
 
     // if (req.body.minPrice > 0 || req.body.maxPrice > 0) {
