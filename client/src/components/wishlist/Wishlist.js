@@ -3,6 +3,7 @@ import Header from "../header/Header";
 import axios from "axios";
 import { Context } from "../../context/Context";
 import { MdDeleteForever } from "react-icons/md";
+import { SlBadge } from "react-icons/sl";
 
 function Wishlist() {
   const { state, dispatch } = useContext(Context);
@@ -54,26 +55,42 @@ function Wishlist() {
               Wishlist
             </h5>
           </div>
-          <div className="flow-root">
-            <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+          <div className="flow-root w-[500px]">
+            <ul className=" divide-y divide-gray-200 dark:divide-gray-700">
               {wishlist.length ? (
                 wishlist?.map((item, idx) => (
                   <li key={item._id} className="py-3 sm:py-4">
                     <div className="flex items-center space-x-4">
                       <div className="flex-shrink-0">
                         <img
-                          className="w-8 h-8 rounded-full"
-                          src={`/images/${item.image}`}
-                          alt="Neil"
+                          className="w-[100px] h-[100px] rounded-md"
+                          src={`${item.img1}`}
+                          alt="img"
                         />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          {item.name}
+                        <p className="text-[16px] font-medium text-gray-900 truncate dark:text-white">
+                          {item.housetitle}
+                        </p>
+                        <p
+                          className="text-[16px] 
+                         text-gray-900 truncate dark:text-white"
+                        >
+                          {item.city},{item.country}
+                        </p>
+                        <p
+                          className=" flex items-center gap-2 text-[16px] 
+                         text-gray-900 truncate dark:text-white"
+                        >
+                          Hosted by{" "}
+                          {item.superhost && (
+                            <SlBadge className="fill-red-500" />
+                          )}
+                          {item.firstname}
                         </p>
                       </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white text-[2rem]">
-                        ${item.price}
+                      <div className="inline-flex items-center text-base  text-gray-900 dark:text-white text-[2rem]">
+                        € {item.price}
                         <MdDeleteForever
                           className="hover:text-red-500 hover:cursor-pointer text-[2rem]"
                           onClick={() => handleDelete(item._id)}
