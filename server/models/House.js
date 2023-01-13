@@ -68,27 +68,22 @@ const houseSchema = new Schema({
   img1: {
     type: String,
     required: true,
-    unique: true,
   },
   img2: {
     type: String,
     required: true,
-    unique: true,
   },
   img3: {
     type: String,
     required: true,
-    unique: true,
   },
   img4: {
     type: String,
     required: true,
-    unique: true,
   },
   img5: {
     type: String,
     required: true,
-    unique: true,
   },
   guests: {
     type: String,

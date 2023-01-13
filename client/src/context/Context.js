@@ -21,6 +21,7 @@ const ContextProvider = ({ children }) => {
     activeIconName: "",
     totalGuests: 0,
     user: {},
+    users: [],
     houses: [],
     housePrice: 56,
   };
@@ -93,6 +94,23 @@ const ContextProvider = ({ children }) => {
           ...state,
           hostfirstDate: action.hostfirstDate,
           hostsecondDate: action.hostsecondDate,
+        };
+      case "addToWishlist":
+        return {
+          ...state,
+          user: {
+            ...state.user,
+            wishlist: [...state.user.wishlist, action.payload],
+          },
+        };
+
+      case "deleteFromWishlist":
+        return {
+          ...state,
+          user: {
+            ...state.user,
+            wishlist: [...action.payload],
+          },
         };
 
       case "logout":

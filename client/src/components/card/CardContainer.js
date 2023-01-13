@@ -49,7 +49,7 @@ const CardContainer = () => {
           <div
             key={i}
             style={{ cursor: "pointer" }}
-            onClick={() => navigate(`/home/${item?.id}`)}
+            // onClick={() => navigate(`/home/${item?.id}`)}
           >
             <HostCard item={item} i={i} />
           </div>
