@@ -11,6 +11,7 @@ import SignUpPage from "./components/signup/SignUp";
 import Host from "./components/becomehost/Host";
 import RegisterForm from "./components/login/RegisterForm";
 import HostLayout from "./components/becomehost/HostLayout";
+import Wishlist from "./components/wishlist/Wishlist";
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
           <Route path="/home/login" element={<LoginForm />} />
           <Route path="/home/register" element={<RegisterForm />} />
           <Route path="/confirmation" element={<SignUpPage />} />
-
+          <Route path="/wishlist" element={<Wishlist />} />
           <Route element={<HostLayout />}>
             <Route path="/host" element={<Host />} />
           </Route>

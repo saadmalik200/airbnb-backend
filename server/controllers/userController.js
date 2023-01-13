@@ -99,3 +99,77 @@ module.exports.delete = async (req, res) => {
   }
 };
 // module.exports = {register, login}
+
+//////////////////////////////// WishList ///////////////////
+
+module.exports.addToWishlist = async (req, res) => {
+  try {
+    console.log("Hello from add to wishlist", req.body);
+
+    const user = await User.findByIdAndUpdate(
+      { _id: req.body.user },
+      {
+        $push: {
+          wishlist: req.body.house,
+        },
+      },
+      { new: true }
+    );
+    console.log("🚀 ~ module.exports.addToWishlist= ~ user", user);
+
+    res.send({ success: true });
+  } catch (error) {
+    console.log("🚀 ~ add to wishlist error", error.message);
+
+    res.send({ success: false, error: error.message });
+  }
+};
+
+module.exports.removeFromWishlist = async (req, res) => {
+  try {
+    console.log("Hello from remove from wishlist", req.body);
+
+    const user = await User.findById(req.body.user);
+
+    const wishlist = user.wishlist.filter((item) => {
+      return item.toString() !== req.body.house;
+    });
+
+    console.log("🚀 ~ module.exports.removeFromWishlist= ~ wishlist", wishlist);
+
+    const updatedUser = await User.findByIdAndUpdate(
+      { _id: req.body.user },
+      { wishlist },
+      { new: true }
+    );
+    console.log(
+      "🚀 ~ module.exports.removeFromWishlist= ~ updatedUser",
+      updatedUser
+    );
+
+    res.send({ success: true, wishlist });
+  } catch (error) {
+    console.log("🚀 ~ remove from wishlist error", error.message);
+
+    res.send({ success: false, error: error.message });
+  }
+};
+
+module.exports.listWishlist = async (req, res) => {
+  try {
+    console.log("Hello from list wishlist", req.params);
+
+    const user = await User.findById(req.params.user).populate({
+      path: "wishlist",
+      select: "-__v",
+    });
+
+    console.log("🚀 ~ module.exports.listWishlist= ~ user", user);
+
+    res.send({ success: true, houses: user.wishlist });
+  } catch (error) {
+    console.log("🚀 ~ list wishlist error", error.message);
+
+    res.send({ success: false, error: error.message });
+  }
+};

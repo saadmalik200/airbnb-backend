@@ -1,10 +1,10 @@
 import * as React from "react";
-
+import axios from "axios";
 import Box from "@mui/joy/Box";
 import Card from "@mui/joy/Card";
 import Typography from "@mui/joy/Typography";
-
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart } from "react-icons/ai";
 
 import Carousel from "react-material-ui-carousel";
 import { Context } from "../../context/Context";
@@ -12,6 +12,7 @@ import { useContext, useEffect, useState } from "react";
 import GeoData from "../card/Geolocation";
 
 import { BsFillStarFill } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -20,7 +21,9 @@ function getRandomInt(min, max) {
 }
 
 export default function ContainerResponsive({ item, i }) {
-  const { state } = useContext(Context);
+  const navigate = useNavigate();
+  const { state, dispatch } = useContext(Context);
+  const [addWishlist, setAddWishlist] = useState(true);
   const [latLng, setLatLng] = useState({
     lat: 0,
     lng: 0,
@@ -40,7 +43,44 @@ export default function ContainerResponsive({ item, i }) {
     getData();
   }, []);
 
-  console.log(state.distance);
+  console.log("this is item", state.user);
+  const handleAddToWishlist = async () => {
+    setAddWishlist(false);
+
+    if (!state.user._id)
+      return alert("You must be logged in to use the wishlist feature");
+
+    const response = await axios.post("/users/wishlist/add", {
+      user: state.user._id,
+      house: item._id,
+    });
+    console.log("🚀 ~ handleWishlist ~ response", response);
+
+    if (response.data.success)
+      dispatch({
+        type: "addToWishlist",
+        payload: item._id,
+      });
+    navigate("/wishlist");
+  };
+
+  const handleRemoveFromWishlist = async () => {
+    setAddWishlist(true);
+    if (!state.user._id)
+      return alert("You must be logged in to use the wishlist feature");
+
+    const response = await axios.post("/users/wishlist/delete", {
+      user: state.user._id,
+      house: item._id,
+    });
+    console.log("🚀 ~ handleWishlist ~ response", response);
+
+    if (response.data.success)
+      dispatch({
+        type: "deleteFromWishlist",
+        payload: response.data.wishlist,
+      });
+  };
   return (
     <Box sx={{ height: 399.61, width: 315.39, resize: 0 }}>
       <GeoData lat={+latLng.lat} lng={+latLng.lng} />
@@ -124,18 +164,17 @@ export default function ContainerResponsive({ item, i }) {
           }}
         >
           <div>
-            <FavoriteBorderIcon
-              className="hover:fill-red-400"
-              style={{
-                color: "white",
-                fill: "red",
-                position: "absolute",
-                right: "1.5rem",
-                top: "1.5rem",
-                fontSize: "2rem",
-                zIndex: "5",
-              }}
-            />
+            {addWishlist ? (
+              <AiOutlineHeart
+                onClick={handleAddToWishlist}
+                className="fill-red-500"
+              />
+            ) : (
+              <AiFillHeart
+                className="fill-red-500"
+                onClick={handleRemoveFromWishlist}
+              />
+            )}
 
             <Typography style={{ display: "flex" }} level="h2" fontWeight="lg">
               <p className="w-[26rem]">
