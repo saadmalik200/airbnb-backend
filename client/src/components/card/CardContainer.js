@@ -72,7 +72,7 @@ const CardContainer = () => {
       !state.activeIconName ? (
         <button
           onClick={handleLoadMore}
-          className="bg-black px-[19px]  py-[14px] w-[137.74px] z-40 rounded-full text-white h-[49.92px] float-right"
+          className="bg-black px-[19px]  py-[14px] w-[137.74px] z-40 rounded-full text-white h-[49.92px] mx-auto"
         >
           Load more
         </button>

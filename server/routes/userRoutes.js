@@ -10,8 +10,8 @@ router.get("/list", userController.list);
 router.delete("/delete/:_id", userController.delete);
 router.post("/emailconfirm", userController.emailConfirm);
 // wishlist routes
-router.post("/wishlist/add", auth, userController.addToWishlist);
-router.post("/wishlist/delete", auth, userController.removeFromWishlist);
+router.post("/wishlist/add", userController.addToWishlist);
+router.post("/wishlist/delete", userController.removeFromWishlist);
 router.get("/wishlist/list/:user", userController.listWishlist);
 
 module.exports = router;
