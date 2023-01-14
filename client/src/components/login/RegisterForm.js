@@ -82,7 +82,7 @@ const RegisterForm = () => {
               >
                 <GrClose />
               </div>
-              <div className="w-[160px] font-[600]">Sign up</div>
+              <div className="w-[160px] font-[600]">Register</div>
               <div></div>
             </div>
             <div className="w-[568] h-[353px] px-[24px]  text-[14px]">

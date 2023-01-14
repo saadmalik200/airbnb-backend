@@ -51,6 +51,9 @@ function Host() {
     console.log(houseData);
     const response = await axios.post("/houses/register", houseData);
     console.log(response);
+    if (!response.data.success) {
+      alert("Please fill the *required values in form");
+    }
   };
 
   useEffect(() => {
@@ -548,15 +551,17 @@ function Host() {
 
             <br />
           </div>
-          <div className="mt-5  flex justify-between px-10">
+          <div className="m-5  flex justify-between px-10">
             <button
-              className="bg-slate-400 rounded-2xl w-[70px] h-[40px] hover:bg-slate-500"
+              onClick={() => navigate("/home")}
+              className="bg-black px-[19px]  py-[14px] w-[137.74px] z-40 rounded-full text-white h-[49.92px]"
               type="submit"
             >
               Back
             </button>
             <button
-              className="bg-slate-400 rounded-2xl w-[70px] h-[40px]  hover:bg-slate-500"
+              onClick={handleSubmit}
+              className="bg-black px-[19px]  py-[14px] w-[137.74px] z-40 rounded-full text-white h-[49.92px]"
               type="submit"
             >
               Submit
