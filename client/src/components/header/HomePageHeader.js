@@ -6,19 +6,30 @@ import SearchExtension from "./SearchExtension";
 import SearchCatagory from "./SearchCatagory";
 import { useNavigate } from "react-router-dom";
 import { BiLogOut } from "react-icons/bi";
-import { BsFillBookmarkHeartFill } from "react-icons/bs";
+import { BiLogIn } from "react-icons/bi";
+import { AiFillHeart } from "react-icons/ai";
 
 const HomePageHeader = () => {
   const { discover, setDiscover, dispatch, state } = useContext(Context);
   const nav = useNavigate();
-  const handleLogin = () => {
-    nav("/home/register");
+  const handleRegister = () => {
+    if (!state?.user?._id) {
+      nav("/home/register");
+    } else {
+      alert("You are logged in!!");
+    }
   };
 
   const handleHost = () => {
     if (!state?.user?._id) {
-      nav("/home/login");
+      alert("Please Register/Log in");
     } else nav("/host");
+  };
+
+  const handleLogout = async () => {
+    dispatch({ type: "logout" });
+    alert("you have logged out successfully");
+    nav("/home");
   };
 
   return (
@@ -37,23 +48,33 @@ const HomePageHeader = () => {
         </div>
         {discover ? <SearchCatagory /> : <Search />}
         <div className="home-page-header-right">
-          <span onClick={handleHost} className="text-background">
+          <span onClick={handleHost} className="bars-user">
             <h3 className="host-text">Become a host</h3>
           </span>
           <span className="globe-background">
             {!state?.user?._id ? (
               <i className="fa-solid fa-globe"></i>
             ) : (
-              <BsFillBookmarkHeartFill className="text-[20px]" />
+              <AiFillHeart
+                onClick={() => nav("/wishlist")}
+                className="text-[20px] fill-red-600"
+              />
             )}
           </span>
-          <div onClick={handleLogin} className="bars-user">
+          <div onClick={handleRegister} className="bars-user">
             <i className="fa-solid fa-bars"></i>
             <i className="fa-solid fa-user"></i>
           </div>
 
-          <div className="globe-background cursor-pointer text-[22px]">
-            <BiLogOut />
+          <div className="globe-background cursor-pointer text-[24px] ">
+            {!state?.user?._id ? (
+              <BiLogIn
+                className="fill-red-600"
+                onClick={() => nav("/home/login")}
+              />
+            ) : (
+              <BiLogOut className="fill-red-600" onClick={handleLogout} />
+            )}
           </div>
         </div>
       </div>

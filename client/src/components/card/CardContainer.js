@@ -4,7 +4,7 @@ import { Context } from "../../context/Context";
 
 import { BsMap } from "react-icons/bs";
 import HostCard from "../becomehost/HostCard";
-import Card from "./Card";
+
 import axios from "axios";
 
 const CardContainer = () => {

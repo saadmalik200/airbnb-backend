@@ -45,8 +45,6 @@ export default function ContainerResponsive({ item, i }) {
 
   console.log("this is item", state.user);
   const handleAddToWishlist = async () => {
-    setAddWishlist(false);
-
     if (!state.user._id)
       return alert("You must be logged in to use the wishlist feature");
 
@@ -54,6 +52,7 @@ export default function ContainerResponsive({ item, i }) {
       user: state.user._id,
       house: item._id,
     });
+    setAddWishlist(false);
     console.log("🚀 ~ handleWishlist ~ response", response);
 
     if (response.data.success)
@@ -61,11 +60,9 @@ export default function ContainerResponsive({ item, i }) {
         type: "addToWishlist",
         payload: item._id,
       });
-    navigate("/wishlist");
   };
 
   const handleRemoveFromWishlist = async () => {
-    setAddWishlist(true);
     if (!state.user._id)
       return alert("You must be logged in to use the wishlist feature");
 
@@ -73,6 +70,7 @@ export default function ContainerResponsive({ item, i }) {
       user: state.user._id,
       house: item._id,
     });
+    setAddWishlist(true);
     console.log("🚀 ~ handleWishlist ~ response", response);
 
     if (response.data.success)
@@ -164,18 +162,19 @@ export default function ContainerResponsive({ item, i }) {
           }}
         >
           <div>
-            {addWishlist ? (
-              <AiOutlineHeart
-                onClick={handleAddToWishlist}
-                className="fill-red-500"
-              />
-            ) : (
-              <AiFillHeart
-                className="fill-red-500"
-                onClick={handleRemoveFromWishlist}
-              />
-            )}
-
+            <div className="relative bottom-[280px] left-[280px] z-10">
+              {addWishlist ? (
+                <AiOutlineHeart
+                  onClick={handleAddToWishlist}
+                  className="fill-red-600 text-[2rem]"
+                />
+              ) : (
+                <AiFillHeart
+                  className="fill-red-600 text-[2rem]"
+                  onClick={handleRemoveFromWishlist}
+                />
+              )}
+            </div>
             <Typography style={{ display: "flex" }} level="h2" fontWeight="lg">
               <p className="w-[26rem]">
                 {item?.city?.slice(0, 15)} {item?.country}{" "}

@@ -51,7 +51,7 @@ const HomePageHeader = () => {
           <span className="globe-background">
             <i className="fa-solid fa-globe"></i>
           </span>
-          <div onClick={handleLogin} className="bars-user">
+          <div className="bars-user">
             <i className="fa-solid fa-bars"></i>
             <i className="fa-solid fa-user"></i>
           </div>

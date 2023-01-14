@@ -62,7 +62,7 @@ const LoginForm = () => {
 
     if (response.data.success) {
       dispatch({ type: "ActiveUser", payload: response.data.user });
-      navigate("/host");
+      navigate("/home");
     } else {
       alert("Invalid phone number or password!!");
     }
