@@ -53,7 +53,7 @@ module.exports.login = async (req, res) => {
       { id: user._id, phone: user.phone },
       process.env.JWT,
       {
-        expiresIn: "1h",
+        expiresIn: "1hr",
       }
     );
     res.cookie("token", token);
