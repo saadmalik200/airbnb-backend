@@ -8,10 +8,11 @@ import { useNavigate } from "react-router-dom";
 import { BiLogOut } from "react-icons/bi";
 import { BiLogIn } from "react-icons/bi";
 import { AiFillHeart } from "react-icons/ai";
-
+import axios from "axios";
 const HomePageHeader = () => {
   const { discover, setDiscover, dispatch, state } = useContext(Context);
   const nav = useNavigate();
+  const [total, setTotal] = useState(0);
   const handleRegister = () => {
     if (!state?.user?._id) {
       nav("/home/register");
@@ -19,6 +20,15 @@ const HomePageHeader = () => {
       alert("You are logged in!!");
     }
   };
+
+  async function getData() {
+    const response = await axios.get("/houses/list");
+    console.log("response from house list", response);
+    if (response.data.success) {
+      dispatch({ type: "HouseList", payload: response.data.houses });
+      setTotal(response.data.total);
+    }
+  }
 
   const handleHost = () => {
     if (!state?.user?._id) {
@@ -39,6 +49,7 @@ const HomePageHeader = () => {
           onClick={() => {
             setDiscover((prev) => false);
             dispatch({ type: "change-active-icon" });
+            getData();
             nav("/home");
           }}
           className="logo-box"
@@ -57,7 +68,7 @@ const HomePageHeader = () => {
             ) : (
               <AiFillHeart
                 onClick={() => nav("/wishlist")}
-                className="text-[20px] fill-red-600"
+                className="text-[20px] fill-red-600 cursor-pointer"
               />
             )}
           </span>

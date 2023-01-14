@@ -57,7 +57,7 @@ function Wishlist() {
           </div>
           <div className="flow-root w-[550px]">
             <ul className=" divide-y divide-gray-200 dark:divide-gray-700">
-              {wishlist.length ? (
+              {wishlist?.length ? (
                 wishlist?.map((item, idx) => (
                   <li key={item._id} className="py-3">
                     <div className="w-full flex items-center justify-between  px-0 gap-1">
