@@ -163,7 +163,7 @@ export default function ContainerResponsive({ item, i }) {
         >
           <div>
             <div className="relative bottom-[280px] left-[280px] z-10">
-              {addWishlist ? (
+              {!state.user?.wishlist?.includes(item._id) ? (
                 <AiOutlineHeart
                   onClick={handleAddToWishlist}
                   className="fill-red-600 text-[2rem]"

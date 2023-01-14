@@ -13,6 +13,10 @@ const userSchema = new Schema({
     required: true,
   },
   wishlist: [{ type: Schema.Types.ObjectId, ref: "House" }],
+  verified: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model("User", userSchema);
