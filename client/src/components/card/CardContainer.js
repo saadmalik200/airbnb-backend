@@ -77,7 +77,7 @@ const CardContainer = () => {
           Load more
         </button>
       ) : (
-        "No more products to load"
+        <p className="text-center">No more products to load</p>
       )}
     </div>
   );

@@ -2,7 +2,7 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const SALT_ROUNDS = 10;
-
+const sendEmail = require("../utilities/email.js");
 // module.exports = function register () {}
 
 module.exports.register = async (req, res) => {
@@ -15,6 +15,11 @@ module.exports.register = async (req, res) => {
     req.body.password = hashesPass;
     const user = await User.create(req.body);
 
+    const token = jwt.sign({ id: user._id }, process.env.JWT, {
+      expiresIn: "1h",
+    });
+
+    sendEmail(token);
     res.send({ success: true, user });
   } catch (error) {
     console.log("🚀 ~ register error", error.message);
@@ -169,6 +174,30 @@ module.exports.listWishlist = async (req, res) => {
     res.send({ success: true, houses: user.wishlist });
   } catch (error) {
     console.log("🚀 ~ list wishlist error", error.message);
+
+    res.send({ success: false, error: error.message });
+  }
+};
+
+module.exports.emailConfirm = async (req, res) => {
+  try {
+    console.log("🚀 ~ hello emailConfirm ", req.body);
+
+    const token = req.body.token;
+
+    const decoded = jwt.verify(token, process.env.JWT);
+    console.log("🚀 ~ emailConfirm ~ decoded", decoded);
+
+    const user = await User.findByIdAndUpdate(
+      { _id: decoded.id },
+      { verified: true },
+      { new: true }
+    );
+    console.log("🚀 ~ emailConfirm ~ user", user);
+
+    res.send({ success: true });
+  } catch (error) {
+    console.log("🚀 ~ emailConfirm ~ error", error.message);
 
     res.send({ success: false, error: error.message });
   }

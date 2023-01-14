@@ -12,6 +12,7 @@ import Host from "./components/becomehost/Host";
 import RegisterForm from "./components/login/RegisterForm";
 import HostLayout from "./components/becomehost/HostLayout";
 import Wishlist from "./components/wishlist/Wishlist";
+import EmailConfirm from "./components/becomehost/EmailConfirm";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route element={<HostLayout />}>
             <Route path="/host" element={<Host />} />
           </Route>
+          <Route path="/emailconfirm/:token" element={<EmailConfirm />} />
         </Routes>
       </BrowserRouter>
     </div>
