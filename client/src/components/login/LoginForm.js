@@ -60,6 +60,9 @@ const LoginForm = () => {
     const response = await axios.post("/users/login", data);
     console.log("response from login", response);
 
+    if (!response.data.user.verified)
+      return alert("Please confirm your email address");
+
     if (response.data.success) {
       dispatch({ type: "ActiveUser", payload: response.data.user });
       navigate("/home");
