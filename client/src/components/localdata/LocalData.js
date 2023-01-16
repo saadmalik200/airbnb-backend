@@ -558,8 +558,7 @@ const data = [
       "https://a0.muscache.com/im/pictures/ee3f84e3-8204-434b-aa33-5d5092e92541.jpg?im_w=720",
     ],
     latlong: ["50.05688753906348", "14.421038303367576"],
-    description:
-      "A new, modern and cosy houseboat, with two terraces, a bar on the waterfront, air conditioning and heating is waiting for You! Fully equipped boat for a cool stay in a great Prague location offers unique accommodation for a special break. Located close to subway, surrounded with nice and home atmosphere cafes, restaurants. Only 15 min. walk from popular sightseeing spots such as Dancing house, National theatre and others.",
+    description: "Small and romantic blockhouse",
     reviews: [
       "Perfect place to chill and enjoy the nature.The house is super beautiful and also the place in general.I Simply love it and will definitely come back!",
       "we are grateful for this magical stay on this houseboat with many wonderful moments...gladly again....",
